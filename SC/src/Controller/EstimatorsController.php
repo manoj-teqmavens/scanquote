@@ -47,15 +47,18 @@ class EstimatorsController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id)
     {
+        $this->loadModel('Companies');
+        $company = $this->Companies->get($id);
+        
         $estimator = $this->Estimators->newEmptyEntity();
         if ($this->request->is('post')) {
             $estimator = $this->Estimators->patchEntity($estimator, $this->request->getData());
             if ($this->Estimators->save($estimator)) {
                 $this->Flash->success(__('The estimator has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Companies','action' => 'edit',$id]);
             }
             $this->Flash->error(__('The estimator could not be saved. Please, try again.'));
         }
@@ -63,7 +66,7 @@ class EstimatorsController extends AppController
             'keyField' => 'id',
             'valueField' => 'company_name'
         ], ['limit' => 200]);
-        $this->set(compact('estimator', 'companies'));
+        $this->set(compact('estimator', 'companies','company'));
     }
 
     /**
@@ -75,20 +78,21 @@ class EstimatorsController extends AppController
      */
     public function edit($id = null)
     {
-        $estimator = $this->Estimators->get($id, [
-            'contain' => [],
-        ]);
+        $estimator = $this->Estimators->get($id);
+        $this->loadModel('Companies');
+        $company = $this->Companies->get($estimator->company_id);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $estimator = $this->Estimators->patchEntity($estimator, $this->request->getData());
             if ($this->Estimators->save($estimator)) {
                 $this->Flash->success(__('The estimator has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Companies','action' => 'edit', $estimator->company_id]);
             }
             $this->Flash->error(__('The estimator could not be saved. Please, try again.'));
         }
         $companies = $this->Estimators->Companies->find('list', ['limit' => 200]);
-        $this->set(compact('estimator', 'companies'));
+        $this->set(compact('estimator', 'companies', 'company'));
     }
 
     /**
@@ -108,6 +112,6 @@ class EstimatorsController extends AppController
             $this->Flash->error(__('The estimator could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller' => 'Companies','action' => 'edit', $estimator->company_id]);
     }
 }

@@ -4,108 +4,150 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<div class="row">
+<!-- <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <h4 class="heading"><? // __('Actions') ?></h4>
+            <? //$this->Html->link(__('Edit User'), ['action' => 'edit', $user->id], ['class' => 'side-nav-item']) ?>
+            <? //$this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => 'side-nav-item']) ?>
+            <?  //$this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <? //$this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="users view content">
-            <h3><?= h($user->id) ?></h3>
+            <h3><? // h($user->id) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('Username') ?></th>
-                    <td><?= h($user->username) ?></td>
+                    <th><? // __('Username') ?></th>
+                    <td><? // h($user->username) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Email') ?></th>
-                    <td><?= h($user->email) ?></td>
+                    <th><? // __('Email') ?></th>
+                    <td><? // h($user->email) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Password') ?></th>
-                    <td><?= h($user->password) ?></td>
+                    <th><? // __('Password') ?></th>
+                    <td><? // h($user->password) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Role') ?></th>
-                    <td><?= h($user->role) ?></td>
+                    <th><? // __('Role') ?></th>
+                    <td><? // h($user->role) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Token') ?></th>
-                    <td><?= h($user->token) ?></td>
+                    <th><? // __('Token') ?></th>
+                    <td><? // h($user->token) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Status') ?></th>
-                    <td><?= h($user->status) ?></td>
+                    <th><? //__('Status') ?></th>
+                    <td><? // h($user->status) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($user->id) ?></td>
+                    <th><? // __('Id') ?></th>
+                    <td><? // $this->Number->format($user->id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Verified') ?></th>
-                    <td><?= $this->Number->format($user->verified) ?></td>
+                    <th><? // __('Verified') ?></th>
+                    <td><? // $this->Number->format($user->verified) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($user->created) ?></td>
+                    <th><? // __('Created') ?></th>
+                    <td><? // h($user->created) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($user->modified) ?></td>
+                    <th><? // __('Modified') ?></th>
+                    <td><? //h($user->modified) ?></td>
                 </tr>
-            </table>
-            <div class="related">
-                <h4><?= __('Related Companies') ?></h4>
-                <?php if (!empty($user->companies)) : ?>
+            </table> -->
+            <!-- <div class="related">
+                <h4><? //__('Related Companies') ?></h4>
+                <?php //if (!empty($user->companies)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Company Name') ?></th>
-                            <th><?= __('Slug') ?></th>
-                            <th><?= __('Email') ?></th>
-                            <th><?= __('Postal Code') ?></th>
-                            <th><?= __('State') ?></th>
-                            <th><?= __('City') ?></th>
-                            <th><?= __('Country') ?></th>
-                            <th><?= __('Contact No') ?></th>
-                            <th><?= __('Status') ?></th>
-                            <th><?= __('User Id') ?></th>
-                            <th><?= __('Created') ?></th>
-                            <th><?= __('Modified') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><? // __('Id') ?></th>
+                            <th><? //__('Company Name') ?></th>
+                            <th><? // __('Slug') ?></th>
+                            <th><? // __('Email') ?></th>
+                            <th><? //__('Postal Code') ?></th>
+                            <th><? //__('State') ?></th>
+                            <th><? //__('City') ?></th>
+                            <th><? //__('Country') ?></th>
+                            <th><? //__('Contact No') ?></th>
+                            <th><? //__('Status') ?></th>
+                            <th><? //__('User Id') ?></th>
+                            <th><? //__('Created') ?></th>
+                            <th><? //__('Modified') ?></th>
+                            <th class="actions"><? //__('Actions') ?></th>
                         </tr>
-                        <?php foreach ($user->companies as $companies) : ?>
+                        <?php //foreach ($user->companies as $companies) : ?>
                         <tr>
-                            <td><?= h($companies->id) ?></td>
-                            <td><?= h($companies->company_name) ?></td>
-                            <td><?= h($companies->slug) ?></td>
-                            <td><?= h($companies->email) ?></td>
-                            <td><?= h($companies->postal_code) ?></td>
-                            <td><?= h($companies->state) ?></td>
-                            <td><?= h($companies->city) ?></td>
-                            <td><?= h($companies->country) ?></td>
-                            <td><?= h($companies->contact_no) ?></td>
-                            <td><?= h($companies->status) ?></td>
-                            <td><?= h($companies->user_id) ?></td>
-                            <td><?= h($companies->created) ?></td>
-                            <td><?= h($companies->modified) ?></td>
+                            <td><? //h($companies->id) ?></td>
+                            <td><? //h($companies->company_name) ?></td>
+                            <td><? //h($companies->slug) ?></td>
+                            <td><? //h($companies->email) ?></td>
+                            <td><? //h($companies->postal_code) ?></td>
+                            <td><? //h($companies->state) ?></td>
+                            <td><? //h($companies->city) ?></td>
+                            <td><? //h($companies->country) ?></td>
+                            <td><? //h($companies->contact_no) ?></td>
+                            <td><? //h($companies->status) ?></td>
+                            <td><? //h($companies->user_id) ?></td>
+                            <td><? //h($companies->created) ?></td>
+                            <td><? //h($companies->modified) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Companies', 'action' => 'view', $companies->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Companies', 'action' => 'edit', $companies->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Companies', 'action' => 'delete', $companies->id], ['confirm' => __('Are you sure you want to delete # {0}?', $companies->id)]) ?>
+                                <? // $this->Html->link(__('View'), ['controller' => 'Companies', 'action' => 'view', $companies->id]) ?>
+                                <? // $this->Html->link(__('Edit'), ['controller' => 'Companies', 'action' => 'edit', $companies->id]) ?>
+                                <? // $this->Form->postLink(__('Delete'), ['controller' => 'Companies', 'action' => 'delete', $companies->id], ['confirm' => __('Are you sure you want to delete # {0}?', $companies->id)]) ?>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
+                        <?php //endforeach; ?>
                     </table>
                 </div>
-                <?php endif; ?>
-            </div>
-        </div>
+                <?php //endif; ?>
+            </div> -->
+        <!-- </div>
     </div>
-</div>
+</div> -->
+
+
+
+
+<div class="card">
+                <div class="card-body">
+                  <div class="template-demo">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb breadcrumb-custom">
+                        <li class="breadcrumb-item"><a href="#">Employee Management</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><span>User Detail Page</span></li>
+                      </ol>
+                    </nav>
+                </div>  
+              </div>
+              </div>  
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-description">
+                  </p>
+                  <?= $this->Html->link(__('List Employees'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>   
+                  <?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id], ['class' => 'side-nav-item']) ?>
+                    <div class="form-group">
+                        <?= __('Username: ') ?>
+                      <?= h($user->username) ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Email: ') ?>
+                      <?= h($user->email) ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Status: ') ?>
+                      <?= isset($user->status)?"Active":"Block" ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Created: ') ?>
+                      <?= h($user->created) ?>
+                    </div>
+                </div>
+              </div>
+            </div>

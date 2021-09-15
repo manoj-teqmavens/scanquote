@@ -23,6 +23,14 @@
 
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
+/*use Cake\Http\Middleware\CsrfProtectionMiddleware;
+use Cake\Http\Middleware\EncryptedCookieMiddleware;
+
+$routes->scope('/', function (RouteBuilder $routes) {
+    $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+    $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
+});*/
+
 
 /*
  * The default class to use for all routes
@@ -71,6 +79,14 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * routes you want in your application.
      */
     $builder->fallbacks();
+});
+
+$routes->scope('/', function (RouteBuilder $routes) {
+    $routes->setExtensions(['json', 'xml']);
+    $routes->connect(
+        '/{states}',
+        ['controller' => 'companies', 'action' => 'countryStates']
+    )->setPass(['id']);
 });
 
 /*

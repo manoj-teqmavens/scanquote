@@ -28,7 +28,7 @@
                     <td><?= h($estimator->email) ?></td>
                     <td><?= h($estimator->phone_no) ?></td>
                     <td><?= $this->Number->format($estimator->status) ?></td>
-                    <td><?= $estimator->has('company') ? $this->Html->link($estimator->company->id, ['controller' => 'Companies', 'action' => 'view', $estimator->company->id]) : '' ?></td>
+                    <td><?= $estimator->has('company') ? $this->Html->link($estimator->company->company_name, ['controller' => 'Companies', 'action' => 'view', $estimator->company->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $estimator->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $estimator->id]) ?>
@@ -40,7 +40,7 @@
         </table>
     </div>
     <div class="paginator">
-        <ul class="pagination">
+        <ul class="pagination flex-wrap pagination-rounded">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>

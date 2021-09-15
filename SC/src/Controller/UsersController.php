@@ -38,12 +38,26 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $users = $this->paginate($this->Users);
+         if($this->request->is('post')){
+           $sKey = $this->request->getData('search_employee');
+           $usersQuery = $this->Users->find('all', [
+            'conditions' => ["AND" => ['Users.role' => '2'],["OR" => ['Users.username LIKE' => '%'.$sKey.'%',
+                              'Users.email LIKE' => '%'.$sKey.'%',
+                          ]]]
+                      ]);
+         }else{
+            $usersQuery = $this->Users->find('all', [
+    'conditions' =>['Users.role' => '2']]); 
+         }    
+
+
+        $users = $this->paginate($usersQuery);
 
         $this->set(compact('users'));
     }
     public function login()
 {
+    $this->viewBuilder()->setLayout('login');
     $this->request->allowMethod(['get', 'post']);
     $result = $this->Authentication->getResult();
     // regardless of POST or GET, redirect if user is logged in

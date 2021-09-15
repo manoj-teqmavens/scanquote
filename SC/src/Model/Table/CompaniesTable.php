@@ -11,6 +11,9 @@ Class CompaniesTable extends Table{
     public function initialize(array $config):void
     {
         $this->addBehavior('Timestamp');
+         $this->hasMany('Estimators', [
+            'foreignKey' => 'company_id',
+        ]);
     }
     public function beforeSave(EventInterface $event, $entity, $options)
     {
