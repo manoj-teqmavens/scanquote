@@ -32,11 +32,11 @@
                </div>
                <?= $this->Form->end();?>
                 <div class="col-12">
+                  <?= $this->Paginator->limitControl([20 => 20,50 => 50, 100 => 100],null,['label' => __('Show Entities')]);?>
                   <div class="table-responsive">
                     <table id="order-listing" class="table">
                       <thead>
                         <tr>
-                            <th><?= $this->Paginator->sort('id') ?></th>
                             <th><?= $this->Paginator->sort('username') ?></th>
                             <th><?= $this->Paginator->sort('email') ?></th>
                             <th><?= $this->Paginator->sort('status') ?></th>
@@ -50,7 +50,6 @@
                         <?php foreach ($users as $user): ?>
                           <?php $verified = $this->Number->format($user->verified);?>
                 <tr>
-                    <td><?= $this->Number->format($user->id) ?></td>
                     <td><?= h($user->username) ?></td>
                     <td><?= h($user->email) ?></td>
                     <td><?= h(isset($user->status)?"Active":"Block") ?></td>

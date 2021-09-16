@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace App;
 
-use Cake\Core\Configure;
+/*use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Datasource\FactoryLocator;
@@ -42,6 +42,38 @@ use Authorization\AuthorizationServiceProviderInterface;
 use Authorization\Middleware\AuthorizationMiddleware;
 use Authorization\Policy\OrmResolver;
 use DateTime;
+*/
+use App\Policy\RequestPolicy;
+use Authentication\UrlChecker\DefaultUrlChecker;
+use Authorization\Exception\ForbiddenException;
+use Authorization\Exception\MissingIdentityException;
+use Authorization\Middleware\RequestAuthorizationMiddleware;
+use Authorization\Policy\MapResolver;
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\Core\Configure;
+use Cake\Core\ContainerInterface;
+use Cake\Core\Exception\MissingPluginException;
+use Cake\Datasource\FactoryLocator;
+use Cake\Error\Middleware\ErrorHandlerMiddleware;
+use Cake\Http\BaseApplication;
+use Cake\Http\Middleware\BodyParserMiddleware;
+use Cake\Http\Middleware\CsrfProtectionMiddleware;
+use Cake\Http\MiddlewareQueue;
+use Cake\Http\ServerRequest;
+use Cake\ORM\Locator\TableLocator;
+use Cake\Routing\Middleware\AssetMiddleware;
+use Cake\Routing\Middleware\RoutingMiddleware;
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
+use Psr\Http\Message\ServerRequestInterface;
+use Authorization\AuthorizationService;
+use Authorization\AuthorizationServiceInterface;
+use Authorization\AuthorizationServiceProviderInterface;
+use Authorization\Middleware\AuthorizationMiddleware;
+use Authorization\Policy\OrmResolver;
+
 
 
 /**
@@ -123,14 +155,29 @@ AuthorizationServiceProviderInterface
             ->add(new RoutingMiddleware($this))
             // add Authentication after RoutingMiddleware
             ->add(new AuthenticationMiddleware($this))
-           // ->add(new AuthorizationMiddleware($this))
+            //->add(new AuthorizationMiddleware($this))
+          /*->add(new AuthorizationMiddleware($this, [
+            'unauthorizedHandler' => [
+              'className' => 'CustomRedirect',
+              'url' => '/users/login',
+            //   'url' => \Cake\Routing\Router::url([
+            //     'controller' => 'Users',
+            //     'action' => 'login'
+            // ]),
+              'queryParam' => 'redirectUrl',
+              'exceptions' => [
+                MissingIdentityException::class,
+                ForbiddenException::class
+              ],
+            ],
+          ]))*/
 
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/4/en/controllers/middleware.html#cross-site-request-forgery-csrf-middleware
             ->add(new CsrfProtectionMiddleware([
                 'httponly' => true,
             ]));
-            
+                        
             $middlewareQueue->add(new AuthorizationMiddleware($this));
         return $middlewareQueue;
     }
@@ -144,7 +191,10 @@ AuthorizationServiceProviderInterface
             ]),
             'queryParam' => 'redirect',
         ]);
-
+        $fields = [
+            'username' => 'email',
+            'password' => 'password',
+          ];        
         // Load identifiers, ensure we check email and password fields
         $authenticationService->loadIdentifier('Authentication.Password', [
             'fields' => [
@@ -156,7 +206,7 @@ AuthorizationServiceProviderInterface
         // Load the authenticators, you want session first
         $authenticationService->loadAuthenticator('Authentication.Session');
 
-        $authenticationService->loadAuthenticator('Authentication.Cookie', [
+       /* $authenticationService->loadAuthenticator('Authentication.Cookie', [
             'rememberMeField' => 'remember_me',
             'fields' => [
                 'username' => 'email',
@@ -170,7 +220,24 @@ AuthorizationServiceProviderInterface
     'name'=>'CookieAuth',
     'expire'=> new DateTime('Thu, 31 Dec 21 15:00:00 +0000')
     ]
-        ]);
+        ]);*/
+          // If the user is on the login page, check for a cookie as well.
+    $authenticationService->loadAuthenticator('Authentication.Cookie', [
+        'rememberMeField' => 'remember_me',
+        'fields' => $fields,
+        'cookie' => [
+          'name' => 'CookieAuth',
+          'expires' => new \DateTime('+1 year'),
+          'path' => '/',
+          'domain' => '',
+          'secure' => false,
+          'httponly' => false,
+          'value' => '',
+        ],
+        'urlChecker' => DefaultUrlChecker::class,
+        'loginUrl' => '/users/login',
+        'passwordHasher' => DefaultPasswordHasher::class
+      ]);
 
         // Configure form data check to pick email and password
         $authenticationService->loadAuthenticator('Authentication.Form', [

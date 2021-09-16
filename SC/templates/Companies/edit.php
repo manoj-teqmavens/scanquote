@@ -73,6 +73,7 @@
                </div>
                <?= $this->Form->end();?>
                 <div class="col-12">
+                  <?= $this->Paginator->limitControl([20 => 20,50 => 50, 100 => 100],null,['label' => __('Show Entities')]);?>
                   <div class="table-responsive">
                     <table id="order-listing" class="table">
                       <thead>

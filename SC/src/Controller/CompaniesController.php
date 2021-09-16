@@ -2,6 +2,7 @@
 namespace App\Controller;
 use Cake\Controller\Component;
 class CompaniesController extends AppController{
+
     public function initialize():void
     {
       parent:: initialize(); 
@@ -45,6 +46,7 @@ class CompaniesController extends AppController{
         if($this->request->is('post')){
             $company = $this->Companies->patchEntity($company, $this->request->getData());
             $company->user_id = 1;
+            //echo "<pre>";print_r($company);die;
             if($this->Companies->save($company)){
                 $this->Flash->success('Your company has been saved');
                 return $this->redirect(['action' => 'index']);
@@ -117,11 +119,12 @@ class CompaniesController extends AppController{
     {
         //$companie = $this->Companies->findById($id)->firstorFail();
         $companie = $this->Companies->get($id, [
-            'contain' => ['Estimators'],
+            'contain' => ['Estimators','Jobs' => ['Estimators']],
         ]);
         //$companie = $this->Companies->get($id, [
         //    'contain' => ['estimators'],
         //]);
+       //echo "<pre>";print_r($companie);die;
         $this->set(compact('companie'));
     }
 

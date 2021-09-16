@@ -28,10 +28,6 @@ class UsersController extends AppController
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['login']);
-        //$this->Authorization->skipAuthorization(['add', 'login']);
-
-
     }
 
     /**
@@ -41,16 +37,21 @@ class UsersController extends AppController
      */
     public function index()
     {
+     
+       // $this->Authorization->skipAuthorization();
+        
         $users = $this->paginate($this->Users);
+        //echo "<pre>";print_r($users);
 
         $this->set(compact('users'));
     }
     public function login()
     {
+        //$this->Authorization->skipAuthorization();
         $this->request->allowMethod(['get', 'post']);
-        $this->Authorization->skipAuthorization();
+        
         // $this->Authorization->skipAuthorization();
-         $cookie = ['email'=>'', 'password'=>'', 'remember_me'=>0];
+         /*$cookie = ['email'=>'', 'password'=>'', 'remember_me'=>0];
     
           if ($this->request->getCookie('CookieAuth')) {
               $cookie = $this->request->getCookie('CookieAuth');
@@ -65,7 +66,7 @@ class UsersController extends AppController
           else {
               //$this->Cookie->delete('CookieAuth');
           }
-          $this->set($cookie);
+          $this->set($cookie);*/
           
         
         $result = $this->Authentication->getResult();

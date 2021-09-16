@@ -45,6 +45,10 @@
 
                     </div>
                     <div class="form-group">
+                      <?= $this->Form->control('postal_code',['class'=> 'form-control']);?>
+
+                    </div>
+                    <div class="form-group">
                       <?php  $status = [1 =>'Active', 0 =>'Block'];
                       ?>  
                       <?= $this->Form->control('status',['type'=>'select', 'class'=> 'form-control','empty'=>'Please select', 'options' => $status]);?>

@@ -45,6 +45,8 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        //$this->loadComponent('Auth');
+        //$this->Auth->allow('login');
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
@@ -54,7 +56,12 @@ class AppController extends Controller
         
         $this->loadComponent('Authentication.Authentication');
         
-        $this->loadComponent('Authorization.Authorization');
+       // $this->loadComponent('Authorization.Authorization');
+        /*$this->loadComponent('Authorization.Authorization', [
+            'skipAuthorization' => [
+                'users/login',
+            ]
+        ]);*/
     }
       // in src/Controller/AppController.php
     public function beforeFilter(\Cake\Event\EventInterface $event)
@@ -63,6 +70,6 @@ class AppController extends Controller
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions(['login','add','forgotpassword','resetpassword','verification']);
-        $this->Authorization->skipAuthorization(['add', 'login']);
+      //  $this->Authorization->skipAuthorization(['add', 'login']);
     }
 }

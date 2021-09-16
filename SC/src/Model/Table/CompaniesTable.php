@@ -14,6 +14,9 @@ Class CompaniesTable extends Table{
          $this->hasMany('Estimators', [
             'foreignKey' => 'company_id',
         ]);
+         $this->hasMany('Jobs', [
+            'foreignKey' => 'company_id',
+        ]);
     }
     public function beforeSave(EventInterface $event, $entity, $options)
     {

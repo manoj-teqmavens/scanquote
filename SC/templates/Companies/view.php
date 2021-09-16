@@ -47,3 +47,45 @@
                 </div>
               </div>
             </div>
+
+  <div class="card">
+                <div class="card-body">
+                  <p class="card-description">
+                    Past Jobs:
+                  </p>
+                <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                      <thead>
+                        <tr>
+                            <th><?=  __('Job ID.') ?></th>
+                            <th><?= __('Response') ?></th>
+                            <th><?= __('Shared At') ?></th>
+                            <th><?= __('Shared With') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php foreach ($companie->jobs as $jobs): 
+
+                          $jobstatus = ['1'=>'Pending','2'=>'Declined','3'=>'Declined'];
+                          ?>
+                <tr>
+                    <td><?= $jobs->job_name; ?></td>
+                    <td><?= $jobstatus[$jobs->job_status];?></td>
+                    <td><?= $jobs->scanned_at;?></td>
+                    <td><?= $jobs->estimator->estimator_name;?></td>
+                    
+                    <td><?= $this->Html->link('View',['controller' => 'Jobs','action' => 'view', $jobs->id]); ?></td>
+                    
+                </tr>
+                <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+ 
+  </div>
+              </div>          
