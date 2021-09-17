@@ -1,0 +1,1 @@
+<p>Hello<br/>Please click link below to reset your password<br/><br/><a href="'.$token.'">Reset Password</a></p>

@@ -56,6 +56,10 @@ class JobsTable extends Table
             'foreignKey' => 'company_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'scanned_by',
+            'joinType' => 'INNER',
+        ]);
     }
 
     /**
@@ -122,6 +126,7 @@ class JobsTable extends Table
     {
         $rules->add($rules->existsIn(['estimator_id'], 'Estimators'), ['errorField' => 'estimator_id']);
         $rules->add($rules->existsIn(['company_id'], 'Companies'), ['errorField' => 'company_id']);
+        $rules->add($rules->existsIn(['scanned_by'], 'Users'), ['errorField' => 'scanned_by']);
 
         return $rules;
     }

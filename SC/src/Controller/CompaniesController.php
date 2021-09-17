@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 use Cake\Controller\Component;
+use Cake\I18n\FrozenTime;
 class CompaniesController extends AppController{
 
     public function initialize():void

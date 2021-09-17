@@ -4,69 +4,64 @@
  * @var \App\Model\Entity\Job $job
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Job'), ['action' => 'edit', $job->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Job'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete # {0}?', $job->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Jobs'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="jobs view content">
-            <h3><?= h($job->id) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('Job Name') ?></th>
-                    <td><?= h($job->job_name) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Bid No') ?></th>
-                    <td><?= h($job->bid_no) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Estimator') ?></th>
-                    <td><?= $job->has('estimator') ? $this->Html->link($job->estimator->id, ['controller' => 'Estimators', 'action' => 'view', $job->estimator->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Company') ?></th>
-                    <td><?= $job->has('company') ? $this->Html->link($job->company->id, ['controller' => 'Companies', 'action' => 'view', $job->company->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Email') ?></th>
-                    <td><?= h($job->email) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Contact No') ?></th>
-                    <td><?= h($job->contact_no) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($job->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Scanned By') ?></th>
-                    <td><?= $this->Number->format($job->scanned_by) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Job Status') ?></th>
-                    <td><?= $this->Number->format($job->job_status) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Scanned At') ?></th>
-                    <td><?= h($job->scanned_at) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($job->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($job->modified) ?></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
+<div class="card">
+                <div class="card-body">
+                  <div class="template-demo">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb breadcrumb-custom">
+                        <li class="breadcrumb-item"><a href="<?= $this->Url->build(['controller' => 'companies', 'action' => 'index']); ?>">Company Management</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><span>Job Detail</span></li>
+                      </ol>
+                    </nav>
+                </div>  
+              </div>
+              </div>  
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-description">
+                  </p>
+                  <?= $this->Html->link(__('List Companies'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>   
+                  <?= $this->Html->link(__('Back'), ['controller' => 'Companies','action' => 'view', $job->company_id], ['class' => 'side-nav-item']) ?>
+                    <div class="form-group">
+                       <?= __('Job Name') ?>
+                       <?= h($job->job_name) ?>
+                    </div>
+                    <div class="form-group">
+                     <?= __('Bid No') ?>
+                     <?= h($job->bid_no) ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Estimator') ?>
+                      <?= $job->has('estimator') ? $this->Html->link($job->estimator->estimator_name, ['controller' => 'Estimators', 'action' => 'view', $job->estimator->id]) : '' ?>
+                    </div>
+
+                    <div class="form-group">
+                      <?= __('Company') ?>
+                      <?= $job->has('company') ? $this->Html->link($job->company->company_name, ['controller' => 'Companies', 'action' => 'view', $job->company->id]) : '' ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Email') ?>
+                      <?= h($job->email) ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Contact No') ?>
+                      <?= h($job->contact_no) ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Scanned By') ?>
+                      <?= $job->user->username ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Job Status') ?>
+                      <?= $this->Number->format($job->job_status) ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Scanned At') ?>
+                      <?= h($job->scanned_at) ?>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+     

@@ -1,11 +1,14 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+
+         <?php if($this->Identity->get('role') == 1){?> 
           <li class="nav-item">
              <a class="nav-link" href="<?= $this->Url->build('/users/index') ?>">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Employee Management</span>
             </a> 
           </li>
+        <?php } ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= $this->Url->build('/companies/index') ?>">
               <i class="icon-ellipsis menu-icon"></i>

@@ -1,3 +1,4 @@
+<?php use Cake\I18n\FrozenTime;?>
 <div class="main-panel">
         <div class="content-wrapper">
           <div class="card">
@@ -46,7 +47,13 @@
                     <td><?= $companie->company_name; ?></td>
                     <td><?= $companie->email;?></td>
                     <td><?= $companie->contact_no;?></td>
-                    <td><?= $companie->created->format(DATE_RFC850);?></td>
+                    <td>
+                      <?php 
+$now = FrozenTime::parse($companie->created);
+echo $now->i18nFormat('MM/dd/yyyy');
+                      ?>
+
+                      </td>
                     <td><?= $this->Html->link('view',['action' => 'view', $companie->id]); ?>
                       <?= $this->Html->link('Edit',['action' => 'edit', $companie->id]); ?></td>
                     <td><?= $this->Form->postLink(

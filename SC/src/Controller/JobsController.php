@@ -36,9 +36,8 @@ class JobsController extends AppController
     public function view($id = null)
     {
         $job = $this->Jobs->get($id, [
-            'contain' => ['Companies', 'Estimators'],
+            'contain' => ['Companies', 'Estimators','Users'],
         ]);
-
         $this->set(compact('job'));
     }
 

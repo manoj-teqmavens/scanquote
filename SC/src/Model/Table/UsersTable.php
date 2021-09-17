@@ -50,6 +50,9 @@ class UsersTable extends Table
         $this->hasMany('Companies', [
             'foreignKey' => 'user_id',
         ]);
+        $this->hasMany('Jobs', [
+            'foreignKey' => 'scanned_by',
+        ]);
     }
 
     /**

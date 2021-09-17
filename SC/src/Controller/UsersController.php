@@ -76,10 +76,19 @@ class UsersController extends AppController
                 return $this->redirect(['controller' => 'Users', 'action' => 'logout']);
             }
         // redirect to /articles after login success
-        $redirect = $this->request->getQuery('redirect', [
+        if($identity->role == 1){
+            $redirect = $this->request->getQuery('redirect', [
             'controller' => 'Users',
             'action' => 'index',
-        ]);
+        ]);    
+        }  
+        if($identity->role == 2){
+            $redirect = $this->request->getQuery('redirect', [
+            'controller' => 'Companies',
+            'action' => 'index',
+        ]);    
+        }  
+        
 
         return $this->redirect($redirect);
     }
@@ -191,14 +200,18 @@ class UsersController extends AppController
 
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
+                $urltoken = $this->Url->build(['controller'=>'users','action' => 'verification',$token]);
                 $this->Flash->success(__('The user has been saved.'));
                 $mailer = new Mailer('default');
             $mailer->setTransport('smtp'); //your email configuration name
-            $mailer->setFrom(['noreply[at]xyx.com' => 'myCake4'])
+            $mailer->setFrom(['noreply[at]scanquote.com' => 'ScanQuote'])
             ->setTo($email)
             ->setEmailFormat('html')
             ->setSubject('Verify New Account')
-            ->deliver('Hi <br/>Please confirm your email link below<br/><a href="http://localhost/myCake4/users/verification/'.$token.'">Verification Email</a><br/>Thank you for registration.');
+            ->setViewVars(['urltoken' => $urltoken])
+            ->viewBuilder()
+            ->setTemplate('register')
+            ->deliver();
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -272,13 +285,18 @@ class UsersController extends AppController
                 if  ($user = $userTable->find('all')->where(['email'=>$email])->first()) { 
                     $user->token = $token;
                     if ($userTable->save($user)){
+
+                        $urltoken = $this->Url->build(['controller' => 'users', 'action' => 'resetpassword',$token]);
                         $mailer = new Mailer('default');
                         $mailer->setTransport('smtp');
                         $mailer->setFrom(['noreply[at]test.com' => 'myCake4'])
                         ->setTo($email)
                         ->setEmailFormat('html')
                         ->setSubject('Forgot Password Request')
-                        ->deliver('Hello<br/>Please click link below to reset your password<br/><br/><a href="http://localhost:8765/users/resetpassword/'.$token.'">Reset Password</a>');
+                        ->setViewVars(['urltoken' => $urltoken])
+                        ->viewBuilder()
+                        ->setTemplate('forgotpassword')
+                        ->deliver();
                     }
                     $this->Flash->success('Reset password link has been sent to your email ('.$email.'), please check your email');
                 }
