@@ -13,16 +13,30 @@ class CompaniesController extends AppController{
     }
     public function index(){
         
+        $identity = $this->Authentication->getIdentity();
+
          if($this->request->is('post')){
            $sKey = $this->request->getData('search_company');
-           $companiesQuery = $this->Companies->find('all', [
+           if($identity->role == 2){
+                $companiesQuery = $this->Companies->find('all', [
     'conditions' => ["OR" => ['Companies.company_name LIKE' => '%'.$sKey.'%',
                               'Companies.email LIKE' => '%'.$sKey.'%',
                               'Companies.contact_no LIKE' => '%'.$sKey.'%'
-                          ]]
-]);
+                          ]]])->where(['user_id'=>$identity->id]); 
+           }else{
+            $companiesQuery = $this->Companies->find('all', [
+    'conditions' => ["OR" => ['Companies.company_name LIKE' => '%'.$sKey.'%',
+                              'Companies.email LIKE' => '%'.$sKey.'%',
+                              'Companies.contact_no LIKE' => '%'.$sKey.'%'
+                          ]]]);
+           }
          }else{
-           $companiesQuery = $this->Companies->find(); 
+            if($identity->role == 2){
+                $companiesQuery = $this->Companies->find('all')->where(['user_id'=>$identity->id]); 
+            }else{
+                $companiesQuery = $this->Companies->find('all'); 
+            }
+           
          }
         
         $companies = $this->Paginator->paginate($companiesQuery);
@@ -33,21 +47,25 @@ class CompaniesController extends AppController{
     {
         $company = $this->Companies->newEmptyEntity();
         $this->loadModel('Countries');
+        $this->loadModel('Users');
+        $identity = $this->Authentication->getIdentity();
+        $user_id = $identity->id;
         //$this->loadModel('States');
         $countries_query = $this->getTableLocator()->get('Countries');
         //$states_query = $this->getTableLocator()->get('States');
         
         $countries = $countries_query->find()->all()->combine('id', 'name');
-        $this->set(compact('countries'));
         
-      //  $states = $states_query->find()->all()->combine('id', 'name');
+        $users = $this->Users->find('all', [
+    'conditions' =>['Users.role' => '2']])->combine('id', 'username'); 
+        $this->set(compact('countries','users','identity'));
         
-    //	$this->set(compact('countries','states'));
 
         if($this->request->is('post')){
+           // echo"<pre>";print_r($this->request->getData());die('123');
             $company = $this->Companies->patchEntity($company, $this->request->getData());
-            $company->user_id = 1;
-            //echo "<pre>";print_r($company);die;
+            //$company->user_id = 1;
+            
             if($this->Companies->save($company)){
                 $this->Flash->success('Your company has been saved');
                 return $this->redirect(['action' => 'index']);
@@ -84,14 +102,19 @@ class CompaniesController extends AppController{
         $this->loadModel('Countries');
         $this->loadModel('States');
         $this->loadModel('Cities');
+        $this->loadModel('Users');
         $countries_query = $this->getTableLocator()->get('Countries');
         $states_query = $this->getTableLocator()->get('States');
         $cities_query = $this->getTableLocator()->get('Cities');
         
         $countries = $countries_query->find()->all()->combine('id', 'name');
+        
+         $users = $this->Users->find('all', [
+    'conditions' =>['Users.role' => '2']])->combine('id', 'username');
+         $identity = $this->Authentication->getIdentity();
         $states = $states_query->find()->all()->combine('id', 'name');
         $cities = $cities_query->find()->all()->combine('id', 'name');
-        $this->set(compact('countries'));
+        $this->set(compact('countries','users','identity'));
         $this->set(compact('states'));
         $this->set(compact('cities'));
         if($this->request->is(['post','put']) && empty($this->request->getData('search_estimator'))){

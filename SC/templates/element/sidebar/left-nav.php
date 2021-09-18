@@ -15,7 +15,7 @@
               <span class="menu-title">Company Management</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-menu menu-icon"></i>
               <span class="menu-title">Markup Management</span>
@@ -39,7 +39,7 @@
                 <li class="nav-item"> <a class="nav-link" href="#">Manage Catalog</a></li>
               </ul>
             </div>
-          </li>
+          </li> -->
         </ul>
       </nav>
        

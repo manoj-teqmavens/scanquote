@@ -54,13 +54,28 @@ echo $now->i18nFormat('MM/dd/yyyy');
                       ?>
 
                       </td>
-                    <td><?= $this->Html->link('view',['action' => 'view', $companie->id]); ?>
-                      <?= $this->Html->link('Edit',['action' => 'edit', $companie->id]); ?></td>
-                    <td><?= $this->Form->postLink(
-                        'Delete',
-                        ['action' => 'delete',  $companie->slug],
-                        ['confirm' => 'Are You sure?']
-                    ); ?></td>
+                    <td><a href="<?= $this->Url->build(['controller' => 'Companies','action' => 'view',  $companie->id]); ?>"><i class="icon-eye menu-icon"></i></a>
+                      <a href="<?= $this->Url->build(['controller' => 'Companies','action' => 'edit',  $companie->id]); ?>"><i class="icon-note menu-icon"></i></a>
+                    <?php 
+
+                    $icon = '<i class="icon-trash menu-icon"></i>';
+                    /*echo   $this->Form->postLink(
+                          "delete",
+                        ['action' => 'delete',  $companie->slug ],
+                        ['confirm' => 'Are You sure?'],
+                        ['escape' => false]); */
+echo $this->Form->postLink(
+                '<i class="icon-trash icon-white"></i>',
+                array(
+                      'action'   => 'delete', $companie->slug
+                      ),
+                array(
+                      'class'    => 'tip',
+                      'escape'   => false,
+                      'confirm'  => 'Are you sure ?'
+                     ));
+
+                        ?></td>
                 </tr>
                 <?php endforeach; ?>
                       </tbody>

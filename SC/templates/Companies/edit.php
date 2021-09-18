@@ -18,8 +18,18 @@
                   </p>
                   <?= $this->Html->link(__('List Companies'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>   
                   <?= $this->Form->create($company); ?>
+                    
+ <?php if($identity->role == 1){?>
+
+<div class="form-group">
+                      <?= $this->Form->control('user_id',['type'=>'select', 'class'=> 'form-control','id'=> 'userid','empty'=>'Please select',  'options' => $users]);?>
+
+                    </div>
+ <?php }else{
+    echo $this->Form->control('user_id',['type'=>'hidden','value'=>$identity->id]);
+ }?>
                     <div class="form-group">
-                        <?php echo $this->Form->control('user_id',['type'=>'hidden','value'=>1]);?>
+                        <?php ?>
                       <?= $this->Form->control('company_name',['class'=> 'form-control']); ?>
                     </div>
                     <div class="form-group">
