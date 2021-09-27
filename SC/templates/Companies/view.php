@@ -77,7 +77,9 @@
                     <td><?= $jobs->scanned_at;?></td>
                     <td><?= $jobs->estimator->estimator_name;?></td>
                     
-                    <td><?= $this->Html->link('View',['controller' => 'Jobs','action' => 'view', $jobs->id]); ?></td>
+                    <td><a href="<?= $this->Url->build(['controller' => 'Jobs','action' => 'view',  $jobs->id]); ?>"><i class=" icon-info menu-icon"></i></a>
+
+                    </td>
                     
                 </tr>
                 <?php endforeach; ?>

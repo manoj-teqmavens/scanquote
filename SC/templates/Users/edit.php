@@ -38,7 +38,7 @@
                       </div>
                     
                     <?= $this->Form->button(__('Submit'),['class' => 'btn btn-primary me-2']) ?>
-                    <button class="btn btn-light">Cancel</button>
+                    <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-light']) ?>  
                  <?= $this->Form->end() ?>
                 </div>
               </div>

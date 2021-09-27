@@ -39,6 +39,7 @@ class EstimatorsTable extends Table
     {
         parent::initialize($config);
 
+        $this->addBehavior('Timestamp');
         $this->setTable('estimators');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');

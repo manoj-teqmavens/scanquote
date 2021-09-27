@@ -88,27 +88,36 @@
                     <table id="order-listing" class="table">
                       <thead>
                         <tr>
+                            <th><?= __('Sr. No.') ?></th>
                             <th><?=  __('Estimator Name') ?></th>
                             <th><?= __('Email') ?></th>
                             <th><?= __('Phone No') ?></th>
                             <th><?= __('Status') ?></th>
-                            <th colspan="2" class="actions"><?= __('Actions') ?></th>
+                            <th  class="actions"><?= __('Actions') ?></th>
 
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($company->estimators as $estimator): ?>
+                        <?php foreach ($company->estimators as $sn => $estimator): ?>
                 <tr>
+                    <td><?= $this->Number->format($sn+1) ?></td>
                     <td><?= $estimator->estimator_name; ?></td>
                     <td><?= $estimator->email;?></td>
                     <td><?= $estimator->phone_no;?></td>
                     <td><?= isset($estimator->status)?"Active":"Block";?></td>
-                    <td><?= $this->Html->link('Edit',['controller' => 'Estimators','action' => 'edit', $estimator->id]); ?></td>
-                    <td><?= $this->Form->postLink(
-                        'Delete',
-                        ['controller' => 'Estimators','action' => 'delete',  $estimator->id],
-                        ['confirm' => 'Are You sure?']
-                    ); ?></td>
+                    <td><a href="<?= $this->Url->build(['controller' => 'Estimators','action' => 'edit',  $estimator->id]); ?>"><i class="icon-note  menu-icon"></i></a>
+                    <?php echo $this->Form->postLink(
+                '<i class="icon-trash icon-white"></i>',
+                array(
+                      'action'   => 'Estimators', $estimator->id
+                      ),
+                array(
+                      'class'    => 'tip',
+                      'escape'   => false,
+                      'confirm'  => 'Are you sure ?'
+                     ));
+
+                        ?></td>
                 </tr>
                 <?php endforeach; ?>
                       </tbody>

@@ -23,8 +23,8 @@
 
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
-/*use Cake\Http\Middleware\CsrfProtectionMiddleware;
-use Cake\Http\Middleware\EncryptedCookieMiddleware;
+use Cake\Http\Middleware\CsrfProtectionMiddleware;
+/*use Cake\Http\Middleware\EncryptedCookieMiddleware;
 
 $routes->scope('/', function (RouteBuilder $routes) {
     $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());

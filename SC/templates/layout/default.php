@@ -29,7 +29,7 @@ $cakeDescription = 'Scan Quote: Streanline Supply Chain System LLC';
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 <!-- 'normalize.min', 'milligram.min', 'cake', -->
-    <?= $this->Html->css(['feather','themify-icons','vendor.bundle.base','style']) ?>
+    <?= $this->Html->css(['feather','themify-icons','vendor.bundle.base','simple-line-icons','style']) ?>
 
     <?= $this->fetch('meta') ?>
 
@@ -37,6 +37,7 @@ $cakeDescription = 'Scan Quote: Streanline Supply Chain System LLC';
     <?= $this->fetch('script') ?>
    
     <?= $this->Html->script('jquery.min') ?>
+    <?= $this->Html->script('vendor.bundle.base') ?>
    
 
 </head>

@@ -9,7 +9,7 @@
                   <div class="template-demo">
                     <nav aria-label="breadcrumb">
                       <ol class="breadcrumb breadcrumb-custom">
-                        <li class="breadcrumb-item"><a href="#">Employee Management</a></li>
+                        <li class="breadcrumb-item"><a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'index']); ?>">Employee Management</a></li>
                         <li class="breadcrumb-item active" aria-current="page"><span>Create New User</span></li>
                       </ol>
                     </nav>
