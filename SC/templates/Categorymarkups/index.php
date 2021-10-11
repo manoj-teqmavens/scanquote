@@ -11,7 +11,7 @@
                   <div class="template-demo">
                     <nav aria-label="breadcrumb">
                       <ol class="breadcrumb breadcrumb-custom">
-                        <li class="breadcrumb-item"><a href="<?= $this->Url->build(['controller' => 'companies', 'action' => 'index']); ?>">Markup Management</a></li>
+                        <li class="breadcrumb-item"><a href="<?= $this->Url->build(['controller' => 'Categorymarkups', 'action' => 'index']); ?>">Markup Management</a></li>
                         <li class="breadcrumb-item active" aria-current="page"><span>Markup Listing</span></li>
                       </ol>
                     </nav>
@@ -21,7 +21,7 @@
              
               <div class="card">
                 <div class="card-body">    
-                    <?= $this->Html->link('Add New Company', ['controller' => 'categories', 'action' => 'add', 'class' => 'btn btn-primary btn-lg btn-block']);?>
+                    <?= $this->Html->link('Add New Company', ['controller' => 'Categorymarkups', 'action' => 'add', 'class' => 'btn btn-primary btn-lg btn-block']);?>
                     
               <div class="row">
                <div class="form-group"></div>
@@ -39,9 +39,7 @@
                         <tr>
                             <th><?= __('Sr. No.') ?></th>
                             <th><?= $this->Paginator->sort('company_id') ?></th>
-                            <th><?= $this->Paginator->sort('category_id') ?></th>
-                            <th><?= $this->Paginator->sort('mark_up') ?></th>
-                            <th><?= $this->Paginator->sort('status') ?></th>
+                            <th><?= __('Status') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
 
                         </tr>
@@ -50,9 +48,7 @@
                          <?php foreach ($categorymarkups as $sn => $categorymarkup): ?>
                 <tr>
                     <td><?= $this->Number->format($sn+1) ?></td>
-                    <td><?= $categorymarkup->has('company') ? $categorymarkup->company->company_name : '' ?></td>
-                    <td><?= $categorymarkup->has('category') ? $categorymarkup->category->category : '' ?></td>
-                    <td><?= h($categorymarkup->mark_up) ?></td>
+                    <td><?= h(isset($categorymarkup->company_name) ? $categorymarkup->company_name : '') ?></td>
                     <td><?= h(isset($categorymarkup->status)?"Active":"Block") ?></td>
                     <td><!-- <a href="<?php //$this->Url->build(['controller' => 'categories','action' => 'view',  $category->id]); ?>"><i class=" icon-info menu-icon"></i></a> -->
                       <a href="<?= $this->Url->build(['controller' => 'categorymarkups','action' => 'edit',  $categorymarkup->id]); ?>"><i class="icon-note  menu-icon"></i></a>

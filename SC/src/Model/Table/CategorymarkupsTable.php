@@ -56,6 +56,7 @@ class CategorymarkupsTable extends Table
             'foreignKey' => 'category_id',
             'joinType' => 'INNER',
         ]);
+        
     }
 
     /**

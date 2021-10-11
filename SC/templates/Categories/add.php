@@ -27,18 +27,18 @@
                   <?= $this->Form->create($category); ?>
                     <div class="form-group">
                         <?php ?>
-                      <?= $this->Form->control('category',['class'=> 'form-control']); ?>
+                      <?= $this->Form->control('category',['class'=> 'form-control','label'=>'Main Category']); ?>
                     </div>
                     <div class="form-group  after-add-more">
                       <?php //echo $this->Form->control('parent_id',['type' => 'select','class'=> 'form-control','empty' => 'Please select','options'=>$ParentCategories]); 
-                        echo $this->Form->control('sub_category[]',['class' => 'form-control','label' => 'Sub Category','escape' => false]);
+                        echo $this->Form->control('sub_category[]',['class' => 'form-control subcat','label' => 'Sub Category','escape' => false]);
                           
 
                       ?>
                        <div class="col-md-2">
                         <div class="form-group change">
                             <label for="">&nbsp;</label><br/>
-                            <a class="btn btn-success add-more">+ Add More</a>
+                            <a class="btn btn-success add-more">+</a>
                         </div>
                     </div>
                     </div>
@@ -49,12 +49,12 @@
                       $markNumber = range(0,100);
                        unset($markNumber[0]);
                       ?>
-                      <?= $this->Form->control('markup',['type'=>'select','class'=> 'form-control','empty'=>'Please select', 'options' => $markNumber]); ?>
+                      <?= $this->Form->control('markup',['type'=>'number','class'=> 'form-control','label'=>'Default Markup']); ?>
                     </div>
                     <div class="form-group">
-                      <?php  $status = [1 =>'Active', 0 =>'Block'];
+                      <?php  $status = [1 =>'Active', 0 =>'Inactive'];
                       ?>  
-                      <?= $this->Form->control('status',['type'=>'select', 'class'=> 'form-control','empty'=>'Please select', 'options' => $status]);?>
+                      <?= $this->Form->control('status',['type'=>'select', 'class'=> 'form-control','default'=>'1', 'options' => $status]);?>
                       </div>
                     
                     <?= $this->Form->button(__('Save'),['class' => 'btn btn-primary me-2']) ?>
@@ -69,7 +69,8 @@
     $("body").on("click",".add-more",function(){ 
         var html = $(".after-add-more").first().clone();
         //  $(html).find(".change").prepend("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
-          $(html).find(".change").html("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>- Remove</a>");
+          $(html).find(".change").html("<label for=''>&nbsp;</label><br/><a class='btn btn-danger remove'>-</a>");
+           //$(html).find(".change").find("input[class*='subcat']").attr('value','');
           $(".after-add-more").last().after(html);
     });
         $("body").on("click",".remove",function(){ 

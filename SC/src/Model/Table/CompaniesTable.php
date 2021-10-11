@@ -17,6 +17,12 @@ Class CompaniesTable extends Table{
          $this->hasMany('Jobs', [
             'foreignKey' => 'company_id',
         ]);
+         $this->hasMany('Categorymarkups',[
+            'foreignkey' => 'company_id',
+        ]);
+         $this->hasMany('Itemsmarkups',[
+            'foreignkey' => 'company_id',
+        ]); 
     }
     public function beforeSave(EventInterface $event, $entity, $options)
     {

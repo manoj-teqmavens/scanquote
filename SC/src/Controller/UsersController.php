@@ -27,7 +27,7 @@ class UsersController extends AppController
         // the infinite redirect loop issue
         //$this->Authentication->addUnauthenticatedActions(['login']);
 
-        $this->Authentication->addUnauthenticatedActions(['login', 'add']);
+        $this->Authentication->addUnauthenticatedActions(['login', 'add','forgotpassword','resetpassword']);
     }
 
         
@@ -274,6 +274,7 @@ class UsersController extends AppController
     }
     public function forgotpassword()
     {
+        $this->viewBuilder()->setLayout('login');
     if ($this->request->is('post')) {
             $email = $this->request->getData('email');
             $token = Security::hash(Security::randomBytes(25));
@@ -308,6 +309,7 @@ class UsersController extends AppController
 
     public function resetpassword($token)
     {
+      $this->viewBuilder()->setLayout('login');
         if($this->request->is('post')){
             $hasher = new DefaultPasswordHasher();
             $newPass = $hasher->hash($this->request->getData('password'));

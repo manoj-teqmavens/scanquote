@@ -4,57 +4,57 @@
  * @var \App\Model\Entity\Productcatalog $productcatalog
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Productcatalog'), ['action' => 'edit', $productcatalog->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Productcatalog'), ['action' => 'delete', $productcatalog->id], ['confirm' => __('Are you sure you want to delete # {0}?', $productcatalog->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Productcatalogs'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Productcatalog'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="productcatalogs view content">
-            <h3><?= h($productcatalog->id) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('Item') ?></th>
-                    <td><?= h($productcatalog->item) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Category') ?></th>
-                    <td><?= $productcatalog->has('category') ? $this->Html->link($productcatalog->category->id, ['controller' => 'Categories', 'action' => 'view', $productcatalog->category->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Price') ?></th>
-                    <td><?= h($productcatalog->price) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Type') ?></th>
-                    <td><?= $productcatalog->has('type') ? $this->Html->link($productcatalog->type->name, ['controller' => 'Types', 'action' => 'view', $productcatalog->type->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($productcatalog->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Subcategory Id') ?></th>
-                    <td><?= $this->Number->format($productcatalog->subcategory_id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Status') ?></th>
-                    <td><?= $this->Number->format($productcatalog->status) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($productcatalog->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($productcatalog->modified) ?></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
+<div class="card">
+                <div class="card-body">
+                  <div class="template-demo">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb breadcrumb-custom">
+                        <li class="breadcrumb-item"><a>Item Management</a></li>
+                        <li class="breadcrumb-item"><a href="<?= $this->Url->build(['controller' => 'companies', 'action' => 'index']); ?>">Manage Catalog</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><span>Item Detail</span></li>
+                      </ol>
+                    </nav>
+                </div>  
+              </div>
+              </div>  
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-description">
+                  </p>
+                  <?= $this->Html->link(__('List Items'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>   
+                  <?= $this->Html->link(__('Edit'), ['action' => 'edit', $productcatalog->id], ['class' => 'side-nav-item']) ?>
+                    <div class="form-group">
+                        <?= __('Item SKU: ') ?>
+                      <?= h($productcatalog->item) ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Main Category: ') ?>
+                      <?= h($productcatalog->category->category) ?>
+                    </div>
+                    <div class="form-group">
+                      <?= __('Sub Category: ') ?>
+                      <?= isset($productcatalog->sub_category->category)?$productcatalog->sub_category->category:'--'; ?>
+                    </div>
+
+                    <div class="form-group">
+                      <?= __('Unit Type: ') ?>
+                      <?= $productcatalog->type->name ?>
+                    </div>
+                     <div class="form-group">
+                      <?= __('Status: ') ?>
+                      <?= isset($productcatalog->status)?"Active":"Block" ?>
+                    </div>
+                     <div class="form-group">
+                      <?= __('Price: ') ?>
+                      <?= h($productcatalog->price) ?>
+                    </div>
+                     <div class="form-group">
+                      <?= __('Default Markup: ') ?>
+                      <?= $productcatalog->category->markup ?>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+

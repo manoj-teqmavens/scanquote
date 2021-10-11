@@ -21,7 +21,7 @@
              
               <div class="card">
                 <div class="card-body">    
-                    <?= $this->Html->link('Create New User', ['controller' => 'users', 'action' => 'add', 'class' => 'btn btn-primary btn-lg btn-block']);?>
+                    <?= $this->Html->link('Create New Employee', ['controller' => 'users', 'action' => 'add', 'class' => 'btn btn-primary btn-lg btn-block']);?>
                     
               <div class="row">
                 <div class="form-group"></div>
@@ -38,11 +38,11 @@
                       <thead>
                         <tr>
                             <th><?= __('Sr. No.') ?></th>
-                            <th><?= $this->Paginator->sort('username') ?></th>
+                            <th><?= __('Full Name') ?></th>
                             <th><?= $this->Paginator->sort('email') ?></th>
-                            <th><?= $this->Paginator->sort('status') ?></th>
-                            <th><?= $this->Paginator->sort('verified') ?></th>
-                            <th><?= $this->Paginator->sort('created') ?></th>
+                            <th><?= __('Status') ?></th>
+                            <th><?= __('Verified') ?></th>
+                            <th><?= __('Created') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
 
                         </tr>
@@ -54,7 +54,7 @@
                     <td><?= $this->Number->format($sn+1) ?></td>
                     <td><?= h($user->username) ?></td>
                     <td><?= h($user->email) ?></td>
-                    <td><?= h(isset($user->status)?"Active":"Block") ?></td>
+                    <td><?= h(($user->status == 1)?"Active":"Inactive") ?></td>
                     <td><?= isset($verified)?"Yes":"No"; ?></td>
                     <td><?= h($user->created) ?></td>
                     <td class="actions">

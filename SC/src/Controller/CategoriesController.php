@@ -188,15 +188,13 @@ class CategoriesController extends AppController
                 }
              }else{
 
-
-
-        if ($this->Categories->delete($category)) {
-            $this->Flash->success(__('The category has been deleted.'));
-        } else {
-            $this->Flash->error(__('The category could not be deleted. Please, try again.'));
-        }
-        
-            return $this->redirect(['action' => 'index']);    
+                if ($this->Categories->delete($category)) {
+                    $this->Flash->success(__('The category has been deleted.'));
+                } else {
+                    $this->Flash->error(__('The category could not be deleted. Please, try again.'));
+                }
+                
+                    return $this->redirect(['action' => 'index']);    
         }
         
     }

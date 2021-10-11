@@ -18,14 +18,14 @@
                   </p>
                   <?= $this->Html->link(__('List Companies'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>   
                   <?= $this->Form->create($company); ?>
-                  <?php if($identity->role == 1){?>
-                  <div class="form-group">
-                      <?= $this->Form->control('user_id',['type'=>'select', 'class'=> 'form-control','id'=> 'userid','empty'=>'Please select',  'options' => $users]);?>
+                  <?php //if($identity->role == 1){?>
+                  <!-- <div class="form-group">
+                      <? //$this->Form->control('user_id',['type'=>'select', 'class'=> 'form-control','id'=> 'userid','empty'=>'Please select',  'options' => $users]);?>
 
-                    </div>
-                    <?php }else{
-                      echo $this->Form->control('user_id',['type'=>'hidden','value'=>$identity->id]);
-                    }?>
+                    </div> -->
+                    <?php //}else{
+                      //echo $this->Form->control('user_id',['type'=>'hidden','value'=>$identity->id]);
+                    //}?>
                     <div class="form-group">
                     	<?php ?>
                       <?= $this->Form->control('company_name',['class'=> 'form-control']); ?>
@@ -57,9 +57,9 @@
 
                     </div>
                     <div class="form-group">
-                      <?php  $status = [1 =>'Active', 0 =>'Block'];
+                      <?php  $status = [1 =>'Active', 0 =>'Inactive'];
                       ?>  
-                      <?= $this->Form->control('status',['type'=>'select', 'class'=> 'form-control','empty'=>'Please select', 'options' => $status]);?>
+                      <?= $this->Form->control('status',['type'=>'select', 'class'=> 'form-control','default'=>'1', 'options' => $status]);?>
                       </div>
                     
                     <?= $this->Form->button(__('Save Company'),['class' => 'btn btn-primary me-2']) ?>

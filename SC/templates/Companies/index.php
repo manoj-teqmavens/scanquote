@@ -43,7 +43,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($companies as $companie): ?>
+                        <?php foreach ($companies as $sn => $companie): ?>
                 <tr>
                     <td><?= $this->Number->format($sn+1) ?></td>
                     <td><?= $companie->company_name; ?></td>

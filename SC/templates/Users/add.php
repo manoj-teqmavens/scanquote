@@ -24,20 +24,20 @@
                   <p class="card-description">
                     Add Employee
                   </p>
-                  <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>   
+                  <?= $this->Html->link(__('List Employee'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>   
                   <?= $this->Form->create($user) ?>
                     <div class="form-group">
-                      <?= $this->Form->control('username',['class' => 'form-control', 'placeholder' => 'Username']); ?>
+                      <?= $this->Form->control('username',['class' => 'form-control', 'placeholder' => 'Full name', 'label' => 'Full Name']); ?>
                     </div>
                     <div class="form-group">
-                      <?= $this->Form->control('email',['class' => 'form-control', 'placeholder' => 'Email']); ?>
+                      <?= $this->Form->control('email',['class' => 'form-control', 'placeholder' => 'Email', 'label' => 'Email (Username)']); ?>
                     </div>
                     <div class="form-group">
                       <?= $this->Form->control('password',['class' => 'form-control', 'placeholder' => 'Password']); ?>
                     </div>
                     <div class="form-group">
-                      <?php  $status = [1 =>'Active', 0 =>'Block'];?>  
-                      <?= $this->Form->control('status',['type'=>'select','class'=> 'form-control','empty'=>'Please select', 'options' => $status]);?>
+                      <?php  $status = [1 =>'Active', 0 =>'Inactive'];?>  
+                      <?= $this->Form->control('status',['type'=>'select','class'=> 'form-control','default'=>'1', 'options' => $status]);?>
                       </div>
                     
                     <?= $this->Form->button(__('Submit'),['class' => 'btn btn-primary me-2']) ?>

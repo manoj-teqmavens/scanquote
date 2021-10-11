@@ -14,7 +14,7 @@
               <?= $this->Form->create() ?>  
                 <div class="form-group">
                   
-                  <?= $this->Form->control('email', ['label' => false,'required' => true,'class' => 'form-control form-control-lg', 'placeholder' => 'Username']) ?>
+                  <?= $this->Form->control('email', ['label' => false,'required' => true,'class' => 'form-control form-control-lg', 'placeholder' => 'Email']) ?>
                 </div>
                 <div class="form-group">
                   
@@ -30,7 +30,7 @@
                       Keep me signed in
                     </label>
                   </div>
-                  <a href="#" class="auth-link text-black">Forgot password?</a>
+                  <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'forgotpassword']); ?>" class="auth-link text-black">Forgot password?</a>
                 </div>
               <?= $this->Form->end() ?>
             </div>

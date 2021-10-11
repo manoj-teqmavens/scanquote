@@ -52,10 +52,12 @@ class ProductcatalogsTable extends Table
         $this->belongsTo('Categories', [
             'foreignKey' => 'category_id',
             'joinType' => 'INNER',
+            'propertyName' => 'category'
         ]);
-        /*$this->belongsTo('Categories', [
+        $this->belongsTo('SubCategories', [
             'foreignKey' => 'subcategory_id',
-        ]);*/
+            'className' => 'Categories'
+        ]);
         $this->belongsTo('Types', [
             'foreignKey' => 'type_id',
             'joinType' => 'INNER',

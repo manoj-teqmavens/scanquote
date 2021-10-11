@@ -15,7 +15,22 @@
                         <li class="breadcrumb-item active" aria-current="page"><span>Manage Catalog</span></li>
                       </ol>
                     </nav>
-                </div>  
+                </div> 
+               <!--   <button type="button" class="btn btn-primary btn-sm btn-block">
+                      <i class="ti-upload btn-icon-prepend"></i>                      
+                      Upload CSV/XLS
+                    </button> -->
+                
+<?php 
+                   echo $this->Form->postLink(
+                '<i class="ti-upload btn-icon-prepend"></i> Upload CSV/XLS',
+                array('controller' => 'productcatalogs', 'action'   => 'uploaditem'),
+                array(
+                      'class'    => 'btn btn-primary btn-sm btn-block',
+                      'escape'   => false,
+                     ));
+
+                        ?>   
               </div>
               </div>  
              
@@ -56,7 +71,7 @@
                     <td><?= $productcatalog->has('type') ? $productcatalog->type->name : '' ?></td>
                     <td>$<?= h($productcatalog->price) ?></td>
                     <td><?= h(!empty($productcatalog->status)?"Active":"Block") ?></td>
-                    <td><!-- <a href="<?php //$this->Url->build(['controller' => 'categories','action' => 'view',  $category->id]); ?>"><i class=" icon-info menu-icon"></i></a> -->
+                    <td><a href="<?= $this->Url->build(['controller' => 'productcatalogs','action' => 'view',  $productcatalog->id]); ?>"><i class=" icon-info menu-icon"></i></a>
                       <a href="<?= $this->Url->build(['controller' => 'productcatalogs','action' => 'edit',  $productcatalog->id]); ?>"><i class="icon-note  menu-icon"></i></a>
                     <?php 
                    echo $this->Form->postLink(

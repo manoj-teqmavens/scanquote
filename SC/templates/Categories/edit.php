@@ -27,13 +27,13 @@
                     
                     <div class="form-group">
                         <?php ?>
-                      <?= $this->Form->control('category',['class'=> 'form-control']); ?>
+                      <?= $this->Form->control('category',['class'=> 'form-control','label' => 'Main Category']); ?>
                     </div>
                     <div class="form-group">
                           <?php  foreach ($category->child_categories as  $scat) {?>
                          <div class="subcatcls-<?php echo $scat->id?>">   
                         <?php echo $this->Form->control('sub_category[exist]['.$scat->id.']',['class' => 'form-control ','label' => 'Sub Category' , 'value' => $scat->category]);?>
-                      <label for=''>&nbsp;</label><br/><a class='btn btn-danger remove-sc' rel="<?= $this->Url->build(['controller' => 'categories','action' => 'delete']); ?>" data-id='<?php echo $scat->id?>' >- Remove</a>
+                      <label for=''>&nbsp;</label><br/><a class='btn btn-danger remove-sc' rel="<?= $this->Url->build(['controller' => 'categories','action' => 'delete']); ?>" data-id='<?php echo $scat->id?>' >-</a>
                     </div>
                       <?php }?>
                       
@@ -47,7 +47,7 @@
                        <div class="col-md-2">
                         <div class="form-group change">
                             <label for="">&nbsp;</label><br/>
-                            <a class="btn btn-success add-more">+ Add More</a>
+                            <a class="btn btn-success add-more">+</a>
                         </div>
                     </div>
                      </div>
@@ -56,10 +56,10 @@
                        <?php $markNumber = range(1,100);
                              unset($markNumber[0]);
                        ?>
-                      <?= $this->Form->control('markup',['type'=>'select','class'=> 'form-control','empty'=>'Please select', 'options' => $markNumber]); ?>
+                      <?= $this->Form->control('markup',['type'=>'number','class'=> 'form-control','label' => 'Default Markup']); ?>
                     </div>
                     <div class="form-group">
-                      <?php  $status = [1 =>'Active', 0 =>'Block'];
+                      <?php  $status = [1 =>'Active', 0 =>'Inactive'];
                       ?>  
                       <?= $this->Form->control('status',['type'=>'select', 'class'=> 'form-control','empty'=>'Please select', 'options' => $status]);?>
                       </div>
